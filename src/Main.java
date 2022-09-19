@@ -8,12 +8,12 @@ public class Main {
             System.out.println(bag.peek(i));
         }
 
-        Pokemon pikachu = new Pokemon("Pikachu", 200, 100, PokeType.Fire);
-        Pokemon charmander = new Pokemon("Charmander", 100, 200, PokeType.Grass);
-        pikachu.learnSkill("fire ball", 100, 50);
-        pikachu.attack(charmander);
-        charmander.rest();
+        Pokemon charmander = new Pokemon("Charmander", 200, 100, PokeType.Fire);
+        charmander.learnSkill("fire ball", 100, 50);
+        charmander.useItem(bag.pop());
 
+        Pokemon tangela = new Pokemon("Tangela", 100, 200, PokeType.Grass);
+        charmander.attack(tangela);
 
 
     }
