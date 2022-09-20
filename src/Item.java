@@ -11,8 +11,8 @@ public class Item {
         this.weight = weight;
 
     }
-
-    public String usageMessage() {
+    @Override
+    public String toString() {
 
         String formattedWeight = String.format("%.2f", this.weight);
         String message = this.name + " heals " + this.healingPower + "HP.(" + formattedWeight + ")";

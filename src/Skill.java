@@ -26,5 +26,12 @@ public class Skill {
 
     }
 
+    @Override
+    public String toString() {
+
+        return this.name + " - AP: " + this.ap + " EC: " + this.ec;
+
+    }
+
 
 }

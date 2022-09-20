@@ -23,7 +23,7 @@ public class Bag {
 
     public Item addItem(Item item) {
 
-        if (item.getWeight() + this.weight > this.maximumWeight) {
+        if (Math.round(item.getWeight()) + this.weight > this.maximumWeight) {
             return null;
         }
 
@@ -54,7 +54,7 @@ public class Bag {
 
         }
 
-        this.weight += item.getWeight();
+        this.weight += Math.round(item.getWeight());
         return item;
 
     }

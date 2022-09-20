@@ -175,7 +175,7 @@ public class Pokemon {
     public void useItem(Item item) {
 
         this.heal(item.getHealingPower());
-        System.out.println(item.usageMessage());
+        System.out.println(item);
 
     }
 
@@ -187,7 +187,9 @@ public class Pokemon {
 
 
     public PokeType getType() {
+
         return this.type;
+
     }
 
     public int getHP() {
@@ -196,6 +198,27 @@ public class Pokemon {
 
     public static boolean isValidHP(int hp, int maxHP) {
         return hp <= maxHP && hp > 0;
+    }
+
+    @Override public String toString() {
+
+        if(!this.hasSkill()) {
+
+            return this.name + this.getType().name();
+
+        }
+
+        else {
+
+            return
+                    this.name + this.getType().name()
+                            + ". Knows " + this.skill.getName()
+                            + " - AP: " + this.skill.getAP()
+                    + " EC: " + this.skill.getEnergyCost();
+
+        }
+
+
     }
 
 
