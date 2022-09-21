@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Bag {
 
     public final int maximumWeight;
-    private int weight;
+    private double weight;
     private final ArrayList<Item> items;
 
     public Bag(int maximumWeight) {
@@ -13,7 +13,7 @@ public class Bag {
 
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return this.weight;
     }
 
@@ -54,7 +54,7 @@ public class Bag {
 
         }
 
-        this.weight += Math.round(item.getWeight());
+        this.weight += item.getWeight();
         return item;
 
     }

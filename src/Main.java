@@ -7,23 +7,24 @@ public class Main {
 
         Bag bag = new Bag(100);
 
-        bag.addItem(new Item("Super Light Potion", 20, 15.6));
+        bag.addItem(new Item("Cool potion", 20, 10));
         bag.addItem(new Item("Super Middle Potion", 20, 20));
         bag.addItem(new Item("Super Heavy Potion", 20, 30.6));
+
 
         for (int i = 0; i < bag.getItemCount(); i++) {
             System.out.println(bag.peek(i));
         }
 
-        System.out.println(bag.getWeight());
 
         Pokemon charmander = new Pokemon("Charmander", 200, 100, PokeType.Fire);
-        charmander.learnSkill("Fire Ball", 100, 50);
+        Skill fireball = new Skill("Fire Ball", 10, 10);
+        charmander.learnSkill(fireball);
 
-        Pokemon tangela = new Pokemon("Tangela", 100, 200, PokeType.Grass);
-        tangela.learnSkill("Giga drain", 20, 10);
+        Pokemon tangela = new Pokemon("Tangela", 50, 200, PokeType.Grass);
+        Skill gigaDrain = new Skill("Giga drain", 20, 10);
+        tangela.learnSkill(gigaDrain);
 
-        //dont put printing inside object classes
         charmander.attack(tangela);
         tangela.useItem(bag.pop());
 

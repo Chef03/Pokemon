@@ -4,14 +4,11 @@ public class Pokemon {
     private final int maxHP;
     private int hp;
     private int ep;
-
     private Skill skill;
-
     private final PokeType type;
-
     private boolean hasFainted;
 
-    public Pokemon(String name, int maxHP, int ep, PokeType type) {
+    public  Pokemon(String name, int maxHP, int ep, PokeType type) {
 
         this.name = name;
         this.maxHP = maxHP;
@@ -112,9 +109,9 @@ public class Pokemon {
 
     }
 
-    public void learnSkill(String name, int ap, int ec) {
+    public void learnSkill(Skill skill) {
 
-        this.skill = new Skill(name, ap, ec);
+        this.skill = skill;
 
     }
 
@@ -200,11 +197,12 @@ public class Pokemon {
         return hp <= maxHP && hp > 0;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
 
         if(!this.hasSkill()) {
 
-            return this.name + this.getType().name();
+            return this.name + " " + this.getType().name();
 
         }
 

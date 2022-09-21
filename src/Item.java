@@ -15,8 +15,7 @@ public class Item {
     public String toString() {
 
         String formattedWeight = String.format("%.2f", this.weight);
-        String message = this.name + " heals " + this.healingPower + "HP.(" + formattedWeight + ")";
-        return message;
+        return this.name + " heals " + this.healingPower + "HP. (" + formattedWeight + ")";
 
     }
 
