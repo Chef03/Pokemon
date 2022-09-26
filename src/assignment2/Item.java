@@ -1,3 +1,5 @@
+package assignment2;
+
 public class Item {
 
     private final String name;
@@ -11,11 +13,23 @@ public class Item {
         this.weight = weight;
 
     }
+
     @Override
     public String toString() {
 
-        String formattedWeight = String.format("%.2f", this.weight);
-        return this.name + " heals " + this.healingPower + "HP. (" + formattedWeight + ")";
+        String formattedWeight = String.format("%.2f", (Math.floor(this.weight * 100) / 100));
+        return this.name + " heals " + this.healingPower + " HP. (" + formattedWeight + ")";
+
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+
+        if (otherObject == null || !(otherObject instanceof Item otherItem)) {
+            return false;
+        }
+
+        return this.name.equals(otherItem.name) && this.weight == otherItem.weight && this.healingPower == otherItem.healingPower;
 
     }
 

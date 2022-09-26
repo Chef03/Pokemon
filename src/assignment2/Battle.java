@@ -1,3 +1,5 @@
+package assignment2;
+
 public class Battle {
 
     public static double getMultiplier(PokeType attackerType, PokeType defenderType) {
