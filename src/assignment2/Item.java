@@ -18,7 +18,11 @@ public class Item {
     public String toString() {
 
         String formattedWeight = String.format("%.2f", (Math.floor(this.weight * 100) / 100));
-        return this.name + " heals " + this.healingPower + " HP. (" + formattedWeight + ")";
+        return String.format(
+                "%s heals %d HP. (%s)",
+                this.name,
+                this.healingPower,
+                formattedWeight);
 
     }
 

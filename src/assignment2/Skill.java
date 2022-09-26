@@ -31,9 +31,28 @@ public class Skill {
     @Override
     public String toString() {
 
-        return this.name + " - AP: " + this.ap + " EC: " + this.ec;
+        return String.format("%s - AP: %d EC: %d", this.name, this.ap, this.ec);
 
     }
+    @Override
+    public boolean equals(Object otherObject) {
+
+
+        if(!(otherObject instanceof Skill)) {
+            return false;
+        }
+
+        Skill otherSkill = (Skill) otherObject;
+        return otherSkill.name.equals(this.name) && otherSkill.ec == this.ec && otherSkill.ap == this.ap;
+
+
+    }
+
+//    @Override
+//    public int hashCode() {
+////        return this.
+//    }
+
 
 
 }

@@ -6,17 +6,18 @@ public class Pokemon {
     private String name;
     private final int maxHP;
     private int hp;
-    private int ep = 100;
-    private Skill skill;
+    private int ep;
+    private Skill skill; //move this to constructor
     private final PokeType type;
-    private boolean hasFainted = false;
 
     public Pokemon(String name, int maxHP, String type) {
 
         this.name = name;
         this.maxHP = maxHP;
         this.hp = maxHP;
+        this.skill = null;
         this.type = PokeType.valueOf(type);
+        this.ep = 100;
 
     }
 
@@ -73,7 +74,7 @@ public class Pokemon {
             alert += " It is super effective!";
         }
 
-        if (defender.hasFainted) {
+        if (defender.hasFainted()) {
 
             targetStatus += String.format(" %s faints.", defender.name);
 
@@ -87,12 +88,7 @@ public class Pokemon {
     public void decreaseHP(int damage) {
 
         int finalHp = this.hp - damage;
-        if (finalHp < 0) {
-            this.hp = 0;
-            this.hasFainted = true;
-        } else {
-            this.hp = finalHp;
-        }
+        this.hp = Math.max(finalHp, 0);
 
     }
 
@@ -114,7 +110,7 @@ public class Pokemon {
 
     public void recoverEnergy() {
 
-        if (!this.hasFainted) {
+        if (!this.hasFainted()) {
             int finalEP = this.ep + 25;
             finalEP = Math.min(finalEP, 100);
             this.ep = finalEP;
@@ -140,7 +136,7 @@ public class Pokemon {
 
     public void rest() {
 
-        if (!this.hasFainted) {
+        if (!this.hasFainted()) {
             this.heal(20);
         }
 
@@ -214,19 +210,37 @@ public class Pokemon {
 
     }
 
+    private boolean hasFainted() {
+        return this.hp <= 0;
+    }
+
     @Override
     public boolean equals(Object otherObject) {
 
-        if (!(otherObject instanceof Pokemon otherPokemon)) {
+        if (!(otherObject instanceof Pokemon)) {
             return false;
         }
+
+        Pokemon otherPokemon = (Pokemon) otherObject;
 
         return otherPokemon.name.equals(this.name)
                 && otherPokemon.type.equals(this.type)
                 && otherPokemon.hp == this.hp
                 && otherPokemon.maxHP == this.maxHP
-                && otherPokemon.ep == this.ep;
+                && otherPokemon.ep == this.ep
+                && this.equalSkills(otherPokemon.skill);
 
+
+    }
+
+    private boolean equalSkills(Skill otherSkill) {
+
+        if(this.skill == null && otherSkill == null) {
+            return true;
+        }
+
+        Skill skill = this.skill != null ? this.skill : otherSkill;
+        return skill.equals(otherSkill);
 
     }
 

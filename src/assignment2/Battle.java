@@ -9,11 +9,11 @@ public class Battle {
         switch (attackerType) {
 
             case Fire:
-                if (defenderType == PokeType.Grass) {
+                if (defenderType.equals(PokeType.Grass)) {
 
                     multiplier = 2;
 
-                } else if (defenderType == PokeType.Water || defenderType == PokeType.Fire) {
+                } else if (defenderType.equals(PokeType.Water) || defenderType == PokeType.Fire) {
 
                     multiplier = 0.5;
 
