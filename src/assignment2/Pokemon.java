@@ -1,13 +1,12 @@
 package assignment2;
 
-
 public class Pokemon {
 
     private String name;
     private final int maxHP;
     private int hp;
     private int ep;
-    private Skill skill; //move this to constructor
+    private Skill skill;
     public final PokeType type;
 
     public Pokemon(String name, int maxHP, String type) {
@@ -15,9 +14,10 @@ public class Pokemon {
         this.name = name;
         this.maxHP = maxHP;
         this.hp = maxHP;
-        this.skill = null;
-        this.type = PokeType.valueOf(type);
+        this.skill = null; //do I need this, I read that default values for uninitialized reference variables is null
         this.ep = 100;
+        this.type = PokeType.valueOf(type);
+
 
     }
 
@@ -30,6 +30,17 @@ public class Pokemon {
 
     public String getName() {
         return this.name;
+    }
+
+    public double getMultiplier(PokeType defenderType) {
+
+        if (this.type.isEffectiveAgainst(defenderType)) {
+            return 2;
+        } else if (this.type.isInEffectiveAgainst(defenderType)) {
+            return 0.5;
+        }
+        return 1;
+
     }
 
     public String attack(Pokemon defender) {
@@ -59,7 +70,7 @@ public class Pokemon {
 //        }
 
 
-        double multiplier = Battle.getMultiplier(this.type, defender.type);
+        double multiplier = this.getMultiplier(defender.type);
         int damageDone = (int) Math.floor(this.skill.getAP() * multiplier);
 
         defender.decreaseHP(damageDone);
@@ -173,7 +184,9 @@ public class Pokemon {
     }
 
 
-    public String getType() { return this.type.toString(); }
+    public String getType() {
+        return this.type.toString();
+    }
 
     public int getCurrentHP() {
         return this.hp;
@@ -217,11 +230,9 @@ public class Pokemon {
     @Override
     public boolean equals(Object otherObject) {
 
-        if (!(otherObject instanceof Pokemon)) {
+        if (!(otherObject instanceof Pokemon otherPokemon)) {
             return false;
         }
-
-        Pokemon otherPokemon = (Pokemon) otherObject;
 
         return otherPokemon.name.equals(this.name)
                 && otherPokemon.type.equals(this.type)
@@ -235,7 +246,7 @@ public class Pokemon {
 
     private boolean equalSkills(Skill otherSkill) {
 
-        if(this.skill == null && otherSkill == null) {
+        if (this.skill == null && otherSkill == null) {
             return true;
         }
 

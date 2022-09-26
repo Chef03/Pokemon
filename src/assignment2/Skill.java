@@ -34,15 +34,15 @@ public class Skill {
         return String.format("%s - AP: %d EC: %d", this.name, this.ap, this.ec);
 
     }
+
     @Override
     public boolean equals(Object otherObject) {
 
 
-        if(!(otherObject instanceof Skill)) {
+        if (!(otherObject instanceof Skill otherSkill)) {
             return false;
         }
 
-        Skill otherSkill = (Skill) otherObject;
         return otherSkill.name.equals(this.name) && otherSkill.ec == this.ec && otherSkill.ap == this.ap;
 
 
@@ -52,7 +52,6 @@ public class Skill {
 //    public int hashCode() {
 ////        return this.
 //    }
-
 
 
 }

@@ -4,8 +4,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Pokemon pikachu = new Pokemon("pikachu", 200, "Grass");
-        System.out.println(pikachu.type);
+
+        Pokemon pikachu = new Pokemon("pikachu", 200, "Fire");
 
     }
 
