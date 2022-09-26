@@ -8,7 +8,7 @@ public class Pokemon {
     private int hp;
     private int ep;
     private Skill skill; //move this to constructor
-    private final PokeType type;
+    public final PokeType type;
 
     public Pokemon(String name, int maxHP, String type) {
 

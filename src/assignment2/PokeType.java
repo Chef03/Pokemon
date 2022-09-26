@@ -1,33 +1,36 @@
 package assignment2;
 
+import java.util.Arrays;
+
 enum PokeType {
 
-//    PokeType x[]  = {PokeType.Water};
+    Fire(new String[] {"Water"}),
+    Water( new String[] {"Water"}),
+    Grass(new String[] {"Water"}),
+    Electric(new String[] {"Water"}),
+    Normal(new String[] {"Water"});
 
-    Fire("Fire"),
-    Water("Water"),
-    Grass("Grass"),
+    private final String[] effectiveAgainst;
+    PokeType(String[] goodAgainst) {
 
-    Electric("Electric"),
-    Normal("Normal");
+        this.effectiveAgainst = goodAgainst;
 
-    private final String type;
-//    private final PokeType[] effectiveAgainst;
-//
-//    private final PokeType[] badAgainst;
 
-    PokeType(String type) {
+    }
 
-        this.type = type;
-//        this.effectiveAgainst = effectiveAgainst;
-//        this.badAgainst = badAgainst;
+    public PokeType[] getEffectiveAgainst() {
 
+        PokeType[] types = new PokeType[this.effectiveAgainst.length];
+        for(int i = 0; i < this.effectiveAgainst.length; i++) {
+            types[i] = PokeType.valueOf(this.effectiveAgainst[i]);
+        }
+        return types;
 
     }
 
     @Override
     public String toString() {
-        return this.type;
+        return this.name();
     }
 
 
