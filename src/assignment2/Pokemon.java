@@ -16,7 +16,7 @@ public class Pokemon {
         this.hp = maxHP;
         this.skill = null; //do I need this, I read that default values for uninitialized reference variables is null
         this.ep = 100;
-        this.type = PokeType.valueOf(type);
+        this.type = PokeType.valueOf(type.toUpperCase());
 
 
     }
@@ -36,7 +36,7 @@ public class Pokemon {
 
         if (this.type.isEffectiveAgainst(defenderType)) {
             return 2;
-        } else if (this.type.isInEffectiveAgainst(defenderType)) {
+        } else if (this.type.isIneffectiveAgainst(defenderType)) {
             return 0.5;
         }
         return 1;
@@ -76,8 +76,8 @@ public class Pokemon {
         defender.decreaseHP(damageDone);
         this.decreaseEP(this.skill.getEnergyCost());
 
-        String alert = this.name + " uses " + this.skill.getName() + " on " + defender.name + ".";
-        String targetStatus = defender.name + " has " + defender.hp + " HP left.";
+        String alert = String.format("%s uses %s on %s.", this.name, this.skill.getName(), defender.name) ;
+        String targetStatus = String.format("%s has %d HP left.", defender.name, defender.hp);
 
         if (multiplier == 0.5) {
             alert += " It is not very effective...";
@@ -121,11 +121,12 @@ public class Pokemon {
 
     public void recoverEnergy() {
 
-        if (!this.hasFainted()) {
-            int finalEP = this.ep + 25;
-            finalEP = Math.min(finalEP, 100);
-            this.ep = finalEP;
-        }
+        if(this.hasFainted()) return;
+
+        int finalEP = this.ep + 25;
+        finalEP = Math.min(finalEP, 100);
+        this.ep = finalEP;
+
 
     }
 
@@ -147,17 +148,18 @@ public class Pokemon {
 
     public void rest() {
 
-        if (!this.hasFainted()) {
-            this.heal(20);
-        }
+        if(this.hasFainted()) return;
+        this.heal(20);
+
 
     }
 
     public void forgetSkill() {
 
-        if (this.knowsSkill()) {
-            this.skill = null;
-        }
+
+        if(!this.knowsSkill()) return;
+        this.skill = null;
+
 
     }
 
@@ -175,6 +177,9 @@ public class Pokemon {
         int healingAmount = this.heal(item.getHealingPower());
         return String.format("%s used %s. It healed %d HP.", this.name, item.getName(), healingAmount);
 
+    }
+    private boolean hasFainted() {
+        return this.hp <= 0;
     }
 
     public static boolean isValidEP(int ep) {
@@ -223,9 +228,6 @@ public class Pokemon {
 
     }
 
-    private boolean hasFainted() {
-        return this.hp <= 0;
-    }
 
     @Override
     public boolean equals(Object otherObject) {

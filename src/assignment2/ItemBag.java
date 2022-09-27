@@ -29,11 +29,11 @@ public class ItemBag {
 
     public int addItem(Item item) {
 
-        if (Math.round(item.getWeight()) + this.weight > this.maximumWeight) {
+        if (item.getWeight() + this.weight > this.maximumWeight) {
             return -1;
         }
 
-        if (this.getNumOfItems() == 0) {
+        if (this.items.size() == 0) {
             items.add(item);
         } else {
 
