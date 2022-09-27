@@ -1,73 +1,26 @@
 package assignment2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 enum PokeType {
 
-    FIRE(
-            "Fire",
-            Arrays.asList("Bug", "Ice", "Grass"),
-            Arrays.asList("Dragon", "Fire", "Water")
-    ),
-    WATER(
-            "Water",
-            Arrays.asList("Fire"),
-            Arrays.asList("Dragon", "Grass", "Water")
-    ),
-    GRASS(
-            "Grass",
-            Arrays.asList("Water"),
-            Arrays.asList("Bug", "Dragon", "Fire", "Grass")
-    ),
-    ELECTRIC(
-            "Electric",
-            Arrays.asList("Water"),
-            Arrays.asList("Dragon", "Electric", "Grass")
-    ),
-    ICE(
-            "Ice",
-            Arrays.asList("Dragon", "Grass"),
-            Arrays.asList("Fire", "Ice", "Water")
-    ),
-
-    BUG(
-            "Bug",
-            Arrays.asList("Grass"),
-            Arrays.asList("Fire")
-    ),
-
-    DRAGON(
-            "Dragon",
-            Arrays.asList("Dragon"),
-            new ArrayList()
-    ),
-
-    NORMAL("Normal", new ArrayList(), new ArrayList());
+    FIRE("Fire"),
+    WATER("Water"),
+    GRASS("Grass"),
+    ELECTRIC("Electric"),
+    ICE("Ice"),
+    BUG("Bug"),
+    DRAGON("Dragon"),
+    NORMAL("Normal");
 
     private final String name;
-    private final List<String> effectiveAgainst;
-    private final List<String> ineffectiveAgainst;
+    public final TypeData data;
 
-
-    PokeType(String name, List<String> goodAgainst, List<String> badAgainst) {
+    PokeType(String name) {
 
         this.name = name;
-        this.effectiveAgainst = goodAgainst;
-        this.ineffectiveAgainst = badAgainst;
+        this.data = TypeData.getType(this.name);
 
-    }
-
-    public boolean isEffectiveAgainst(PokeType type) {
-
-        return this.effectiveAgainst.contains(type.name);
-
-    }
-
-    public boolean isIneffectiveAgainst(PokeType type) {
-
-        return this.ineffectiveAgainst.contains(type.name);
 
     }
 

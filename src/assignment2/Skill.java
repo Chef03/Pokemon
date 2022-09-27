@@ -1,5 +1,7 @@
 package assignment2;
 
+import java.util.Objects;
+
 public class Skill {
 
     private final String name;
@@ -43,15 +45,14 @@ public class Skill {
             return false;
         }
 
-        return otherSkill.name.equals(this.name) && otherSkill.ec == this.ec && otherSkill.ap == this.ap;
+        return otherSkill.hashCode() == this.hashCode();
 
 
     }
 
-//    @Override
-//    public int hashCode() {
-////        return this.
-//    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, ap, ec);
+    }
 }

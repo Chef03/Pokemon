@@ -1,20 +1,22 @@
 package assignment2;
 
+import java.util.Objects;
+
 public class Pokemon {
 
     private String name;
+    public final PokeType type;
     private final int maxHP;
     private int hp;
     private int ep;
     private Skill skill;
-    public final PokeType type;
 
     public Pokemon(String name, int maxHP, String type) {
 
         this.name = name;
         this.maxHP = maxHP;
         this.hp = maxHP;
-        this.skill = null; //do I need this, I read that default values for uninitialized reference variables is null
+        this.skill = null;
         this.ep = 100;
         this.type = PokeType.valueOf(type.toUpperCase());
 
@@ -34,9 +36,9 @@ public class Pokemon {
 
     public double getMultiplier(PokeType defenderType) {
 
-        if (this.type.isEffectiveAgainst(defenderType)) {
+        if (this.type.data.isEffectiveAgainst(defenderType.toString())) {
             return 2;
-        } else if (this.type.isIneffectiveAgainst(defenderType)) {
+        } else if (this.type.data.isIneffectiveAgainst(defenderType.toString())) {
             return 0.5;
         }
         return 1;
@@ -71,6 +73,9 @@ public class Pokemon {
 
 
         double multiplier = this.getMultiplier(defender.type);
+
+//        System.out.println(String.format("Attacker: %s attacked %s multiplier: %f", this.type, defender.type,  multiplier));
+
         int damageDone = (int) Math.floor(this.skill.getAP() * multiplier);
 
         defender.decreaseHP(damageDone);
@@ -237,14 +242,13 @@ public class Pokemon {
             return false;
         }
 
-        return otherPokemon.name.equals(this.name)
-                && otherPokemon.type.equals(this.type)
-                && otherPokemon.hp == this.hp
-                && otherPokemon.maxHP == this.maxHP
-                && otherPokemon.ep == this.ep
-                && this.equalSkills(otherPokemon.skill);
+        return otherPokemon.hashCode() == this.hashCode();
 
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type, maxHP, skill);
     }
 
     private boolean equalSkills(Skill otherSkill) {

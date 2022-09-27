@@ -1,5 +1,7 @@
 package assignment2;
 
+import java.util.Objects;
+
 public class Item {
 
     private final String name;
@@ -33,8 +35,13 @@ public class Item {
             return false;
         }
 
-        return this.name.equals(otherItem.name) && this.weight == otherItem.weight && this.healingPower == otherItem.healingPower;
+        return this.hashCode() == otherItem.hashCode();
 
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, healingPower, weight);
     }
 
     public int getHealingPower() {
