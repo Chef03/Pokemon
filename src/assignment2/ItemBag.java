@@ -15,29 +15,22 @@ public class ItemBag {
 
     }
 
-    public double getCurrentWeight() {
-        return this.weight;
-    }
-
-    public double getMaxWeight() {
-        return this.maximumWeight;
-    }
-
-    public int getNumOfItems() {
-        return this.items.size();
-    }
-
     public int addItem(Item item) {
+
 
         if (item.getWeight() + this.weight > this.maximumWeight) {
             return -1;
         }
 
         if (this.items.size() == 0) {
-            items.add(item);
-        } else {
 
-            Item lastItem = this.items.get(this.getNumOfItems() - 1);
+            items.add(item);
+
+        }
+
+        else {
+
+            Item lastItem = this.items.get(this.items.size() - 1);
 
             if (lastItem.getWeight() > item.getWeight()) {
 
@@ -45,7 +38,7 @@ public class ItemBag {
 
             } else {
 
-                for (int i = 0; i < this.getNumOfItems(); i++) {
+                for (int i = 0; i < this.items.size(); i++) {
 
                     if (this.items.get(i).getWeight() <= item.getWeight()) {
 
@@ -61,13 +54,13 @@ public class ItemBag {
         }
 
         this.weight += item.getWeight();
-        return this.items.indexOf(item);
+        return items.indexOf(item);
 
     }
 
     public Item removeItemAt(int index) {
 
-        if (!this.itemDoesExist(index)) {
+        if (this.itemDoesNotExistAt(index)) {
             return null;
         }
         Item item = this.items.get(index);
@@ -79,11 +72,11 @@ public class ItemBag {
 
     public String peekItemAt(int index) {
 
-        if (!this.itemDoesExist(index)) {
+        if (this.itemDoesNotExistAt(index)) {
             return "";
         }
         Item item = this.items.get(index);
-        return item.toString(); //for now
+        return item.toString();
 
     }
 
@@ -97,10 +90,20 @@ public class ItemBag {
 
     }
 
-
-    private boolean itemDoesExist(int index) {
-        return index <= this.items.size() - 1 && index >= 0;
+    private boolean itemDoesNotExistAt(int index) {
+        return index > this.items.size() - 1 || index < 0;
     }
 
+    public double getCurrentWeight() {
+        return this.weight;
+    }
+
+    public double getMaxWeight() {
+        return this.maximumWeight;
+    }
+
+    public int getNumOfItems() {
+        return this.items.size();
+    }
 
 }

@@ -76,7 +76,7 @@ public class Pokemon {
         defender.decreaseHP(damageDone);
         this.decreaseEP(this.skill.getEnergyCost());
 
-        String alert = String.format("%s uses %s on %s.", this.name, this.skill.getName(), defender.name) ;
+        String alert = String.format("%s uses %s on %s.", this.name, this.skill.getName(), defender.name);
         String targetStatus = String.format("%s has %d HP left.", defender.name, defender.hp);
 
         if (multiplier == 0.5) {
@@ -121,7 +121,7 @@ public class Pokemon {
 
     public void recoverEnergy() {
 
-        if(this.hasFainted()) return;
+        if (this.hasFainted()) return;
 
         int finalEP = this.ep + 25;
         finalEP = Math.min(finalEP, 100);
@@ -146,18 +146,21 @@ public class Pokemon {
 
     }
 
-    public void rest() {
 
-        if(this.hasFainted()) return;
-        this.heal(20);
+    public String useItem(Item item) {
 
+        if (this.hp >= this.maxHP) {
+            return String.format("%s could not use %s. HP is already full.", this.name, item.getName());
+        }
+        int healingAmount = this.heal(item.getHealingPower());
+        return String.format("%s used %s. It healed %d HP.", this.name, item.getName(), healingAmount);
 
     }
 
     public void forgetSkill() {
 
 
-        if(!this.knowsSkill()) return;
+        if (!this.knowsSkill()) return;
         this.skill = null;
 
 
@@ -169,25 +172,23 @@ public class Pokemon {
 
     }
 
-    public String useItem(Item item) {
-
-        if (this.hp >= this.maxHP) {
-            return String.format("%s could not use %s. HP is already full.", this.name, item.getName());
-        }
-        int healingAmount = this.heal(item.getHealingPower());
-        return String.format("%s used %s. It healed %d HP.", this.name, item.getName(), healingAmount);
-
-    }
-    private boolean hasFainted() {
-        return this.hp <= 0;
-    }
-
     public static boolean isValidEP(int ep) {
 
         return ep <= 100 && ep > 0;
 
     }
 
+    public void rest() {
+
+        if (this.hasFainted()) return;
+        this.heal(20);
+
+
+    }
+
+    private boolean hasFainted() {
+        return this.hp <= 0;
+    }
 
     public String getType() {
         return this.type.toString();
