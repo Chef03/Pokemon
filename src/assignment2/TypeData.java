@@ -1,106 +1,96 @@
 package assignment2;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class TypeData {
 
-    private final static HashMap<String, TypeData> PokemonTypes = loadTypes();
-    private final HashSet<String> EffectiveTypes;
-    private final HashSet<String> IneffectiveTypes;
+    private final static EnumMap<PokeType, TypeData> PokemonTypes = new EnumMap<>(PokeType.class);
+    public final EnumSet<PokeType> effectiveTypes;
+    public final EnumSet<PokeType> ineffectiveTypes;
 
-    private TypeData(HashSet<String> goodAgainst, HashSet<String> badAgainst) {
+    private TypeData(EnumSet<PokeType> effectiveAgainst, EnumSet<PokeType> ineffectiveAgainst) {
 
-        this.EffectiveTypes = goodAgainst;
-        this.IneffectiveTypes = badAgainst;
-
-    }
-
-    public static TypeData getType(String name) {
-
-        return PokemonTypes.get(name);
+        this.effectiveTypes = effectiveAgainst;
+        this.ineffectiveTypes = ineffectiveAgainst;
 
     }
 
-    public boolean isEffectiveAgainst(String defenderType) {
+    public static TypeData getType(PokeType pokemonType) {
 
-        return this.EffectiveTypes.contains(defenderType);
-
-    }
-
-    public boolean isIneffectiveAgainst(String defenderType) {
-
-        return this.IneffectiveTypes.contains(defenderType);
+        if(PokemonTypes.size() < 1) {
+            loadTypes();
+        }
+        return PokemonTypes.get(pokemonType);
 
     }
 
-    private static HashMap<String, TypeData> loadTypes() {
+    private static void loadTypes() {
 
-        HashMap<String, TypeData> set = new HashMap<>();
 
-        set.put("Normal", new TypeData(
-                new HashSet<>(),
-                new HashSet<>()
-        ));
-
-        set.put(
-                "Fire",
+        PokemonTypes.put(
+                PokeType.NORMAL,
                 new TypeData(
-                        new HashSet<>(Arrays.asList("Bug", "Grass", "Ice")),
-                        new HashSet<>(Arrays.asList("Dragon", "Fire", "Water"))
+                        EnumSet.noneOf(PokeType.class),
+                        EnumSet.noneOf(PokeType.class)
                 )
         );
 
-        set.put(
-                "Water",
+        PokemonTypes.put(
+                PokeType.FIRE,
                 new TypeData(
-                        new HashSet<>(Arrays.asList("Fire")),
-                        new HashSet<>(Arrays.asList("Dragon", "Grass", "Water"))
+                        EnumSet.of(PokeType.BUG, PokeType.GRASS, PokeType.ICE),
+                        EnumSet.of(PokeType.DRAGON, PokeType.FIRE, PokeType.WATER)
                 )
         );
 
-        set.put(
-                "Dragon",
+        PokemonTypes.put(
+                PokeType.WATER,
                 new TypeData(
-                        new HashSet<>(Arrays.asList("Dragon")),
-                        new HashSet<>()
+                        EnumSet.of(PokeType.FIRE),
+                        EnumSet.of(PokeType.DRAGON, PokeType.GRASS, PokeType.WATER)
                 )
         );
 
-        set.put(
-                "Electric",
+        PokemonTypes.put(
+                PokeType.DRAGON,
                 new TypeData(
-                        new HashSet<>(Arrays.asList("Water")),
-                        new HashSet<>(Arrays.asList("Dragon", "Electric", "Grass"))
+                        EnumSet.of(PokeType.DRAGON),
+                        EnumSet.noneOf(PokeType.class)
                 )
         );
 
-        set.put(
-                "Grass",
+        PokemonTypes.put(
+                PokeType.ELECTRIC,
                 new TypeData(
-                        new HashSet<>(Arrays.asList("Water")),
-                        new HashSet<>(Arrays.asList("Dragon","Bug", "Fire", "Grass" ))
+                        EnumSet.of(PokeType.WATER),
+                        EnumSet.of(PokeType.DRAGON, PokeType.GRASS, PokeType.ELECTRIC)
                 )
         );
 
-        set.put(
-                "Ice",
+        PokemonTypes.put(
+                PokeType.GRASS,
                 new TypeData(
-                        new HashSet<>(Arrays.asList("Dragon", "Grass")),
-                        new HashSet<>(Arrays.asList("Fire", "Ice", "Water"))
+                        EnumSet.of(PokeType.WATER),
+                        EnumSet.of(PokeType.DRAGON, PokeType.GRASS, PokeType.BUG, PokeType.FIRE)
+                )
+        );
+
+        PokemonTypes.put(
+                PokeType.ICE,
+                new TypeData(
+                        EnumSet.of(PokeType.DRAGON, PokeType.GRASS),
+                        EnumSet.of(PokeType.ICE, PokeType.ICE, PokeType.FIRE)
                 )
         );
 
 
-        set.put(
-                "Bug",
+        PokemonTypes.put(
+                PokeType.BUG,
                 new TypeData(
-                        new HashSet<>(Arrays.asList("Grass")),
-                        new HashSet<>(Arrays.asList("Fire"))
+                        EnumSet.of(PokeType.GRASS),
+                        EnumSet.of(PokeType.FIRE)
                 )
         );
-        return set;
 
 
     }

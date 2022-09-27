@@ -16,19 +16,13 @@ public class Skill {
 
     }
 
-    public int getAP() {
-        return this.ap;
-    }
-
     public String getName() {
         return this.name;
     }
-
-    public int getEnergyCost() {
-
-        return this.ec;
-
+    public int getAP() {
+        return this.ap;
     }
+    public int getEnergyCost() { return this.ec; }
 
     @Override
     public String toString() {
@@ -40,19 +34,18 @@ public class Skill {
     @Override
     public boolean equals(Object otherObject) {
 
-
         if (!(otherObject instanceof Skill otherSkill)) {
             return false;
         }
 
         return otherSkill.hashCode() == this.hashCode();
 
-
     }
-
 
     @Override
     public int hashCode() {
         return Objects.hash(name, ap, ec);
     }
+
+
 }

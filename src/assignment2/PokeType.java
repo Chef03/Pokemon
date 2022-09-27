@@ -14,13 +14,24 @@ enum PokeType {
     NORMAL("Normal");
 
     private final String name;
-    public final TypeData data;
 
     PokeType(String name) {
 
         this.name = name;
-        this.data = TypeData.getType(this.name);
 
+    }
+
+    public boolean isIneffectiveAgainst(PokeType type) {
+
+        TypeData data = TypeData.getType(this);
+        return data.ineffectiveTypes.contains(type);
+
+    }
+
+    public boolean isEffectiveAgainst(PokeType type) {
+
+        TypeData data = TypeData.getType(this);
+        return data.effectiveTypes.contains(type);
 
     }
 

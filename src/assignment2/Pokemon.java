@@ -36,9 +36,9 @@ public class Pokemon {
 
     public double getMultiplier(PokeType defenderType) {
 
-        if (this.type.data.isEffectiveAgainst(defenderType.toString())) {
+        if (this.type.isEffectiveAgainst(defenderType)) {
             return 2;
-        } else if (this.type.data.isIneffectiveAgainst(defenderType.toString())) {
+        } else if (this.type.isIneffectiveAgainst(defenderType)) {
             return 0.5;
         }
         return 1;
@@ -249,17 +249,6 @@ public class Pokemon {
     @Override
     public int hashCode() {
         return Objects.hash(name, type, maxHP, skill);
-    }
-
-    private boolean equalSkills(Skill otherSkill) {
-
-        if (this.skill == null && otherSkill == null) {
-            return true;
-        }
-
-        Skill skill = this.skill != null ? this.skill : otherSkill;
-        return skill.equals(otherSkill);
-
     }
 
 
