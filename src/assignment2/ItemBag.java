@@ -23,7 +23,7 @@ public class ItemBag {
             return -1;
         }
 
-        if (this.items.size() == 0) {
+        if (this.items.size() < 1 || this.items.get(this.items.size() - 1).getWeight() > item.getWeight()) {
 
             items.add(item);
 
@@ -31,34 +31,19 @@ public class ItemBag {
 
         else {
 
-            Item lastItem = this.items.get(this.items.size() - 1);
+            int i = 0;
+            int itemAmount = this.getNumOfItems();
 
-            if (lastItem.getWeight() > item.getWeight()) {
+            do {
 
-                this.items.add(item);
-
-            }
-
-            else if(items.get(0).getWeight() <= item.getWeight()) {
-
-                this.items.add(0, item);
-
-            }
-
-            else {
-
-                for (int i = 1; i < this.items.size(); i++) {
-
-                    if (this.items.get(i).getWeight() <= item.getWeight()) {
-
-                        this.items.add(i, item);
-                        break;
-
-                    }
-
+                if (this.items.get(i).getWeight() <= item.getWeight()) {
+                    this.items.add(i, item);
+                } else {
+                    i++;
                 }
 
             }
+            while (this.getNumOfItems() <= itemAmount);
 
         }
 
