@@ -6,19 +6,25 @@ public class Pokemon {
 
     private String name;
     public final PokeType type;
+    private final TypeData typeData;
     private final int maxHP;
     private int hp;
+    private final int healAmount;
+    private final int maxEP;
     private int ep;
     private Skill skill;
 
     public Pokemon(String name, int maxHP, String type) {
 
         this.name = name;
+        this.type = PokeType.valueOf(type.toUpperCase());
+        this.typeData = TypeData.getType(this.type);
         this.maxHP = maxHP;
         this.hp = maxHP;
+        this.healAmount = 20;
+        this.maxEP = 100;
+        this.ep = this.maxEP;
         this.skill = null;
-        this.ep = 100;
-        this.type = PokeType.valueOf(type.toUpperCase());
 
 
     }
@@ -36,9 +42,9 @@ public class Pokemon {
 
     public double getMultiplier(PokeType defenderType) {
 
-        if (this.type.isEffectiveAgainst(defenderType)) {
+        if (this.typeData.effectiveTypes.contains(defenderType)) {
             return 2;
-        } else if (this.type.isIneffectiveAgainst(defenderType)) {
+        } else if (this.typeData.ineffectiveTypes.contains(defenderType)) {
             return 0.5;
         }
         return 1;
@@ -111,7 +117,7 @@ public class Pokemon {
     public void decreaseEP(int consumedEP) {
 
         int finalEp = this.ep - consumedEP;
-        if (Pokemon.isValidEP(finalEp)) {
+        if (this.isValidEP(finalEp)) {
             this.ep = finalEp;
         }
 
@@ -177,16 +183,16 @@ public class Pokemon {
 
     }
 
-    public static boolean isValidEP(int ep) {
+    public boolean isValidEP(int ep) {
 
-        return ep <= 100 && ep > 0;
+        return ep <= this.maxEP && ep > 0;
 
     }
 
     public void rest() {
 
         if (this.hasFainted()) return;
-        this.heal(20);
+        this.heal(this.healAmount);
 
 
     }

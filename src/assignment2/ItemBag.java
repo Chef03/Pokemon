@@ -11,6 +11,7 @@ public class ItemBag {
     public ItemBag(double maximumWeight) {
 
         this.maximumWeight = maximumWeight;
+        this.weight = 0;
         this.items = new ArrayList<>();
 
     }
@@ -36,9 +37,17 @@ public class ItemBag {
 
                 this.items.add(item);
 
-            } else {
+            }
 
-                for (int i = 0; i < this.items.size(); i++) {
+            else if(items.get(0).getWeight() <= item.getWeight()) {
+
+                this.items.add(0, item);
+
+            }
+
+            else {
+
+                for (int i = 1; i < this.items.size(); i++) {
 
                     if (this.items.get(i).getWeight() <= item.getWeight()) {
 

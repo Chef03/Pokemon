@@ -1,6 +1,8 @@
 package assignment2;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.EnumSet;
+
 
 public class TypeData {
 
@@ -20,6 +22,7 @@ public class TypeData {
         if(PokemonTypes.size() < 1) {
             loadTypes();
         }
+
         return PokemonTypes.get(pokemonType);
 
     }
@@ -79,7 +82,7 @@ public class TypeData {
                 PokeType.ICE,
                 new TypeData(
                         EnumSet.of(PokeType.DRAGON, PokeType.GRASS),
-                        EnumSet.of(PokeType.ICE, PokeType.ICE, PokeType.FIRE)
+                        EnumSet.of(PokeType.WATER, PokeType.ICE, PokeType.FIRE)
                 )
         );
 

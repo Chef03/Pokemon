@@ -31,7 +31,7 @@ public class Item {
     @Override
     public boolean equals(Object otherObject) {
 
-        if (otherObject == null || !(otherObject instanceof Item otherItem)) {
+        if (!(otherObject instanceof Item otherItem)) {
             return false;
         }
 
