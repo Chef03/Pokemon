@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class Task2Test {
 
     @Test
-    public void shouldNotKnowSkills(){
+    public void shouldNotKnowSkills() {
         Pokemon charmander = new Pokemon("Charmander", 100, "Fire");
         assertFalse(charmander.knowsSkill()); // must be false upon creation.
         assertEquals("Charmander (Fire)", charmander.toString());
@@ -20,7 +20,7 @@ public class Task2Test {
     }
 
     @Test
-    public void shouldLearnSkills(){
+    public void shouldLearnSkills() {
         Pokemon bulbasaur = new Pokemon("Bulbasaur", 150, "Grass");
         assertFalse(bulbasaur.knowsSkill()); // must be false upon creation.
         assertEquals("Bulbasaur (Grass)", bulbasaur.toString());
@@ -38,7 +38,7 @@ public class Task2Test {
     }
 
     @Test
-    public void shouldForgetSkill(){
+    public void shouldForgetSkill() {
         Pokemon oddish = new Pokemon("Oddish", 60, "Grass");
         assertFalse(oddish.knowsSkill());
         oddish.learnSkill("Mega Drain", 30, 20);

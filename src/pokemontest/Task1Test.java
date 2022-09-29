@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class Task1Test {
 
     @Test
-    public void shouldCreateValidPokemon(){
+    public void shouldCreateValidPokemon() {
         Pokemon charmander = new Pokemon("Charmander", 100, "Fire");
         assertEquals(100, charmander.getEnergy());
         assertEquals(100, charmander.getCurrentHP());
@@ -30,7 +30,7 @@ public class Task1Test {
     }
 
     @Test
-    public void shouldCheckEqualPokemons(){
+    public void shouldCheckEqualPokemons() {
         Pokemon exeggute1 = new Pokemon("Exeggcute", 95, "Grass");
         Pokemon exeggute2 = new Pokemon("Exeggcute", 95, "Grass");
         Pokemon ditto = new Pokemon("Exeggcute", 95, "Normal"); // diff type.

@@ -34,11 +34,14 @@ public class Skill {
     @Override
     public boolean equals(Object otherObject) {
 
-        if (!(otherObject instanceof Skill otherSkill)) {
+        if (!(otherObject instanceof Skill)) {
             return false;
         }
 
-        return otherSkill.hashCode() == this.hashCode();
+        Skill otherSkill = (Skill) otherObject;
+        return this.name.equals(otherSkill.name)
+                && this.ap == otherSkill.ap
+                && this.ec == otherSkill.ec;
 
     }
 

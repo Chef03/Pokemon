@@ -16,6 +16,17 @@ public class Item {
 
     }
 
+    public int getHealingPower() {
+        return this.healingPower;
+    }
+
+    public double getWeight() {
+        return this.weight;
+    }
+
+    public String getName() {
+        return this.name;
+    }
     @Override
     public String toString() {
 
@@ -31,29 +42,21 @@ public class Item {
     @Override
     public boolean equals(Object otherObject) {
 
-        if (!(otherObject instanceof Item otherItem)) {
+        if (!(otherObject instanceof Item)) {
             return false;
         }
 
-        return this.hashCode() == otherItem.hashCode();
+        Item otherItem = (Item) otherObject;
+
+        return this.name.equals(otherItem.name)
+                && this.healingPower == otherItem.healingPower
+                && this.weight == otherItem.weight;
 
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(name, healingPower, weight);
-    }
-
-    public int getHealingPower() {
-        return this.healingPower;
-    }
-
-    public double getWeight() {
-        return this.weight;
-    }
-
-    public String getName() {
-        return this.name;
     }
 
 }

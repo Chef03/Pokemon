@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Task4Test {
 
     @Test
-    public void shouldBeSuperEffective(){
+    public void shouldBeSuperEffective() {
         Pokemon starmie = new Pokemon("Starmie", 180, "Water");
         Pokemon vileplume = new Pokemon("Vileplume", 220, "Grass");
         Pokemon ninetales = new Pokemon("Ninetales", 155, "Fire");
@@ -27,7 +27,7 @@ public class Task4Test {
     }
 
     @Test
-    public void shouldNotBeEffective(){
+    public void shouldNotBeEffective() {
         Pokemon starmie = new Pokemon("Starmie", 180, "Water");
         Pokemon vileplume = new Pokemon("Vileplume", 220, "Grass");
         Pokemon ninetales = new Pokemon("Ninetales", 155, "Fire");
@@ -46,7 +46,7 @@ public class Task4Test {
     }
 
     @Test
-    public void shouldBeNormalDamage(){
+    public void shouldBeNormalDamage() {
         Pokemon starmie = new Pokemon("Starmie", 180, "Water");
         Pokemon vileplume = new Pokemon("Vileplume", 220, "Grass");
         Pokemon ninetales = new Pokemon("Ninetales", 155, "Fire");
@@ -76,7 +76,7 @@ public class Task4Test {
     }
 
     @Test
-    public void shouldNotGoBelowZero(){
+    public void shouldNotGoBelowZero() {
         Pokemon tangela = new Pokemon("Tangela", 160, "Grass");
         Pokemon starmie = new Pokemon("Starmie", 180, "Water");
         Pokemon vileplume = new Pokemon("Vileplume", 220, "Grass");

@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class  Task3Test {
+public class Task3Test {
 
     @Test
-    public void shouldReceiveDamage(){
+    public void shouldReceiveDamage() {
         Pokemon gyarados = new Pokemon("Gyarados", 100, "Water");
         gyarados.learnSkill("OP Hyper Beam", 100, 10); //Cheap EC so gyrados doesnt need to rest.
 
@@ -27,9 +27,8 @@ public class  Task3Test {
     }
 
 
-
     @Test
-    public void shouldRest(){
+    public void shouldRest() {
         Pokemon gyarados = new Pokemon("Gyarados", 100, "Water");
         gyarados.learnSkill("OP Hyper Beam", 100, 10); //Cheap EC so gyrados doesnt need to rest.
         gyarados.rest();
@@ -49,7 +48,7 @@ public class  Task3Test {
     }
 
     @Test
-    public void shouldNotRestFainted(){
+    public void shouldNotRestFainted() {
         Pokemon gyarados = new Pokemon("Gyarados", 100, "Water");
         gyarados.learnSkill("OP Hyper Beam", 100, 10); //Cheap EC so gyrados doesnt need to rest.
 
@@ -65,7 +64,7 @@ public class  Task3Test {
     }
 
     @Test
-    public void shouldSpendAndRecoverEP(){
+    public void shouldSpendAndRecoverEP() {
         Pokemon rattata = new Pokemon("Rattata", 65, "Normal");
 
         Pokemon squirtle = new Pokemon("Squirtle", 100, "Water");
@@ -88,7 +87,7 @@ public class  Task3Test {
     }
 
     @Test
-    public void shouldNeverExceedEPLimit(){
+    public void shouldNeverExceedEPLimit() {
         Pokemon meowth = new Pokemon("Meowth", 75, "Normal");
         Pokemon shellder = new Pokemon("Shellder", 100, "Water");
         shellder.learnSkill("Bubblebeam", 40, 15);
@@ -101,7 +100,7 @@ public class  Task3Test {
     }
 
     @Test
-    public void shouldNotExceedMaxHP(){
+    public void shouldNotExceedMaxHP() {
         Pokemon meowth = new Pokemon("Meowth", 75, "Normal");
         Pokemon shellder = new Pokemon("Shellder", 100, "Water");
         shellder.learnSkill("Water gun", 30, 15);

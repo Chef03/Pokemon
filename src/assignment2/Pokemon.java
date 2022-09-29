@@ -227,7 +227,6 @@ public class Pokemon {
 
         }
 
-
         return String.format(
                 "%s (%s). Knows %s - AP: %d EC: %d",
                 this.name,
@@ -244,11 +243,18 @@ public class Pokemon {
     @Override
     public boolean equals(Object otherObject) {
 
-        if (!(otherObject instanceof Pokemon otherPokemon)) {
+        if (!(otherObject instanceof Pokemon)) {
             return false;
         }
 
-        return otherPokemon.hashCode() == this.hashCode();
+        Pokemon otherPokemon = (Pokemon) otherObject;
+
+        return this.name.equals(otherPokemon.name)
+                && this.type.equals(otherPokemon.type)
+                && (this.skill == null && otherPokemon.skill == null || this.skill.equals(otherPokemon.skill))
+                && this.hp == otherPokemon.hp
+                && this.ep == otherPokemon.ep
+                && this.maxHP == otherPokemon.maxHP;
 
     }
 

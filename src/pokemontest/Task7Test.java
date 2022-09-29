@@ -2,14 +2,24 @@ package pokemontest;
 
 import assignment2.Item;
 import assignment2.ItemBag;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class Task7Test {
+
+    @BeforeEach
+    public void setupLocale() {
+        Locale.setDefault(Locale.ENGLISH);
+    }
+
     @Test
-    public void shouldCreateValidItemStash(){
+    public void shouldCreateValidItemStash() {
         Item potion = new Item("Potion", 20, 5.0);
         Item superPotion = new Item("Super Potion", 40, 8.0);
 
@@ -26,7 +36,7 @@ public class Task7Test {
     }
 
     @Test
-    public void shouldAddItemsCorrectly(){
+    public void shouldAddItemsCorrectly() {
         Item potion1 = new Item("Potion", 20, 5.0);
         Item potion2 = new Item("Potion", 20, 5.0);
         Item potion3 = new Item("Potion", 20, 5.0);
@@ -46,7 +56,7 @@ public class Task7Test {
     }
 
     @Test
-    public void shouldPreserveOrder(){
+    public void shouldPreserveOrder() {
         Item potion1 = new Item("Potion", 20, 5.0);
         Item potion2 = new Item("Potion", 20, 5.0);
         Item hyperPotion = new Item("Hyper Potion", 50, 10.0);
@@ -69,7 +79,7 @@ public class Task7Test {
     }
 
     @Test
-    public void shouldRemoveItemsByIndex(){
+    public void shouldRemoveItemsByIndex() {
         Item potion = new Item("Potion", 20, 5.0);
         Item hyperPotion = new Item("Hyper Potion", 50, 10.0);
         Item superPotion = new Item("Super Potion", 40, 8.0);
@@ -87,7 +97,7 @@ public class Task7Test {
     }
 
     @Test
-    public void shouldPopItem(){
+    public void shouldPopItem() {
         Item hyperPotion = new Item("Hyper Potion", 50, 10.0);
         Item superPotion = new Item("Super Potion", 40, 8.0);
 

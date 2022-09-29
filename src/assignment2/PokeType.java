@@ -1,7 +1,5 @@
 package assignment2;
 
-
-
 enum PokeType {
 
     FIRE("Fire"),
@@ -12,7 +10,6 @@ enum PokeType {
     BUG("Bug"),
     DRAGON("Dragon"),
     NORMAL("Normal");
-
     private final String name;
 
     PokeType(String name) {
@@ -21,11 +18,9 @@ enum PokeType {
 
     }
 
-
     @Override
     public String toString() {
         return this.name;
     }
-
 
 }

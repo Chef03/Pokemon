@@ -3,7 +3,6 @@ package assignment2;
 import java.util.EnumMap;
 import java.util.EnumSet;
 
-
 public class TypeData {
 
     private final static EnumMap<PokeType, TypeData> PokemonTypes = new EnumMap<>(PokeType.class);
@@ -28,7 +27,6 @@ public class TypeData {
     }
 
     private static void loadTypes() {
-
 
         PokemonTypes.put(
                 PokeType.NORMAL,

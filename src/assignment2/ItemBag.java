@@ -76,7 +76,7 @@ public class ItemBag {
 
     public Item popItem() {
 
-        if (this.items.size() == 0) {
+        if (this.getNumOfItems() == 0) {
             return null;
         }
         this.weight -= this.items.get(0).getWeight();
