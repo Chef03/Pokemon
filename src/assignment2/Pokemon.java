@@ -238,10 +238,7 @@ public class Pokemon {
 
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, type, maxHP, skill);
-    }
+
 
 
 }

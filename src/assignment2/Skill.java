@@ -45,10 +45,6 @@ public class Skill {
 
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, ap, ec);
-    }
 
 
 }

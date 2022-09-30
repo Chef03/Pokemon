@@ -54,9 +54,6 @@ public class Item {
 
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, healingPower, weight);
-    }
+
 
 }
