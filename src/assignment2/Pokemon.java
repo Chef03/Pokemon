@@ -41,9 +41,12 @@ public class Pokemon {
 
     public double getMultiplier(PokeType defenderType) {
 
-        if (this.typeData.effectiveTypes.contains(defenderType)) {
+        boolean isEffective = this.typeData.effectiveTypes.contains(defenderType);
+        boolean isNotEffective = this.typeData.ineffectiveTypes.contains(defenderType);
+
+        if (isEffective) {
             return 2;
-        } else if (this.typeData.ineffectiveTypes.contains(defenderType)) {
+        } else if (isNotEffective) {
             return 0.5;
         }
         return 1;
@@ -77,25 +80,22 @@ public class Pokemon {
 //        }
 
 
-        double multiplier = this.getMultiplier(defender.type);
-        this.doDamage(defender);
-        int finalEp = this.ep - this.skill.getEnergyCost();
-        this.ep = Math.max(finalEp, 0);
-
+        this.useSkill();
+        double multiplier = this.doDamage(defender);
 
         String alert = String.format("%s uses %s on %s.", this.name, this.skill.getName(), defender.name);
         String targetStatus = String.format("%s has %d HP left.", defender.name, defender.hp);
 
         if (multiplier == 0.5) {
             alert += " It is not very effective...";
-        } else if (multiplier == 2) {
+        }
+
+        else if (multiplier == 2) {
             alert += " It is super effective!";
         }
 
         if (defender.hasFainted()) {
-
             targetStatus += String.format(" %s faints.", defender.name);
-
         }
 
         return alert + System.lineSeparator() + targetStatus;
@@ -103,10 +103,12 @@ public class Pokemon {
 
     }
 
-    public void doDamage(Pokemon defender) {
+    public double doDamage(Pokemon defender) {
 
-        int damageDone = (int) Math.floor(this.skill.getAP() * this.getMultiplier(defender.type));
+        double multiplier = this.getMultiplier(defender.type);
+        int damageDone = (int) Math.floor(this.skill.getAP() * multiplier);
         defender.hp = Math.max(defender.hp - damageDone, 0);
+        return multiplier;
 
     }
 
@@ -148,12 +150,15 @@ public class Pokemon {
 
     }
 
-    public void forgetSkill() {
 
+    public void useSkill() {
+        this.ep = Math.max(this.ep - this.skill.getEnergyCost(), 0);
+    }
+
+    public void forgetSkill() {
 
         if (!this.knowsSkill()) return;
         this.skill = null;
-
 
     }
 
