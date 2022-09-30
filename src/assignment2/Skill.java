@@ -1,6 +1,5 @@
 package assignment2;
 
-import java.util.Objects;
 
 public class Skill {
 
