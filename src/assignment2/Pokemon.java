@@ -26,7 +26,6 @@ public class Pokemon {
         this.ep = this.maxEP;
         this.skill = null;
 
-
     }
 
 
@@ -59,11 +58,11 @@ public class Pokemon {
 //
 //        }
 //
-//        if (defender.hasFainted) {
-//
-//            return defender.name + " has fainted.";
-//
-//        }
+        if (defender.hasFainted()) {
+
+            return defender.name + " has fainted.";
+
+        }
 //
 //        if (!this.knowsSkill()) {
 //
@@ -79,13 +78,10 @@ public class Pokemon {
 
 
         double multiplier = this.getMultiplier(defender.type);
+        this.doDamage(defender);
+        int finalEp = this.ep - this.skill.getEnergyCost();
+        this.ep = Math.max(finalEp, 0);
 
-//        System.out.println(String.format("Attacker: %s attacked %s multiplier: %f", this.type, defender.type,  multiplier));
-
-        int damageDone = (int) Math.floor(this.skill.getAP() * multiplier);
-
-        defender.decreaseHP(damageDone);
-        this.decreaseEP(this.skill.getEnergyCost());
 
         String alert = String.format("%s uses %s on %s.", this.name, this.skill.getName(), defender.name);
         String targetStatus = String.format("%s has %d HP left.", defender.name, defender.hp);
@@ -107,19 +103,10 @@ public class Pokemon {
 
     }
 
-    public void decreaseHP(int damage) {
+    public void doDamage(Pokemon defender) {
 
-        int finalHp = this.hp - damage;
-        this.hp = Math.max(finalHp, 0);
-
-    }
-
-    public void decreaseEP(int consumedEP) {
-
-        int finalEp = this.ep - consumedEP;
-        if (this.isValidEP(finalEp)) {
-            this.ep = finalEp;
-        }
+        int damageDone = (int) Math.floor(this.skill.getAP() * this.getMultiplier(defender.type));
+        defender.hp = Math.max(defender.hp - damageDone, 0);
 
     }
 
@@ -133,38 +120,31 @@ public class Pokemon {
     public void recoverEnergy() {
 
         if (this.hasFainted()) return;
-
-        int finalEP = this.ep + 25;
-        finalEP = Math.min(finalEP, 100);
-        this.ep = finalEP;
-
+        this.ep = Math.min(this.ep + 25, 100);
 
     }
 
-    public int heal(int amount) {
+    public void heal() {
 
-        int amountHealed = amount;
-        int finalHealth = this.hp + amount;
-
-        if (finalHealth > this.maxHP) {
-            amountHealed = this.maxHP - this.hp;
-            this.hp = this.maxHP;
-        } else {
-            this.hp = finalHealth;
-        }
-
-        return amountHealed;
+        this.hp = Math.min(this.hp + this.healAmount, this.maxHP);
 
     }
 
+    private int itemHeal(Item item) {
+
+        int initialHP = this.hp;
+        this.hp = Math.min(this.hp + item.getHealingPower(), this.maxHP);
+        return this.hp - initialHP;
+
+    }
 
     public String useItem(Item item) {
 
         if (this.hp >= this.maxHP) {
             return String.format("%s could not use %s. HP is already full.", this.name, item.getName());
         }
-        int healingAmount = this.heal(item.getHealingPower());
-        return String.format("%s used %s. It healed %d HP.", this.name, item.getName(), healingAmount);
+        int healAmount = this.itemHeal(item);
+        return String.format("%s used %s. It healed %d HP.", this.name, item.getName(), healAmount);
 
     }
 
@@ -183,16 +163,11 @@ public class Pokemon {
 
     }
 
-    public boolean isValidEP(int ep) {
-
-        return ep <= this.maxEP && ep > 0;
-
-    }
 
     public void rest() {
 
         if (this.hasFainted()) return;
-        this.heal(this.healAmount);
+        this.heal();
 
 
     }

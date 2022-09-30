@@ -35,7 +35,6 @@ public class ItemBag {
             int itemAmount = this.getNumOfItems();
 
             do {
-
                 if (this.items.get(i).getWeight() <= item.getWeight()) {
                     this.items.add(i, item);
                 } else {
