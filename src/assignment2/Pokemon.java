@@ -5,6 +5,7 @@ public class Pokemon {
     private final PokeType type;
     private final int maxHP;
     private final int maxEP;
+    private final int energyRestoreAmount;
     private final int healAmount;
     private String name;
     private int hp;
@@ -20,6 +21,7 @@ public class Pokemon {
         this.maxEP = 100;
         this.ep = this.maxEP;
         this.healAmount = 20;
+        this.energyRestoreAmount = 25;
         this.skill = null;
 
     }
@@ -49,7 +51,7 @@ public class Pokemon {
     public void recoverEnergy() {
 
         if (!this.hasFainted()) {
-            this.ep = Math.min(this.ep + 25, 100);
+            this.ep = Math.min(this.ep + this.energyRestoreAmount, 100);
         }
 
     }

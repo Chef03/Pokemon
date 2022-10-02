@@ -1,3 +1,14 @@
+* General Design:
+I decided to go with a "Pokemon" class to handle core logical aspects of the pokemon itself there, stuff like attacking,
+resting, learning skills and using items are defined in methods there, however I felt like battling
+and battle messages should have their own class, so I created the "Battle" class for that, and for the String representation of the objects I decided
+to separate that to its own "Formatter" class which has static methods for that there, and I also have classes for items (Item)
+and skills "Skill" and a class for the bag "ItemBag", the goal was to follow the single-responsibility principle which states that each class
+should have a single responsibility to make the code more maintainable, so I tried as much as possible to keep purely the core aspects of the object
+defined within it, and relied on other utility classes on generating not so key aspects of the object.
+I felt like following the SRP made altering code and managing functionality a very intuitive process as everything kinda related to each other.
+
+* Design Change:
 At the start of the assignment there were only 4 types which didn't seem like a
 lot of things to deal with in the battling aspect so what i did was use a simple
 switch statement combined with if statements inside to handle how the damage
