@@ -27,7 +27,9 @@ public class Pokemon {
     public String attack(Pokemon target) {
 
         String warning = Battle.warn(this, target);
-        if (warning != null) return warning;
+        if (warning != null) {
+            return warning;
+        }
 
         this.ep = Math.max(this.ep - this.skill.getEnergyCost(), 0);
         double multiplier = Battle.getMultiplier(this, target);
