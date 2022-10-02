@@ -4,20 +4,19 @@ import java.util.ArrayList;
 
 public class ItemBag {
 
-    public final double maximumWeight;
-    private double weight;
+    private final double maximumWeight;
     private final ArrayList<Item> items;
+    private double weight;
 
     public ItemBag(double maximumWeight) {
 
-        this.maximumWeight = maximumWeight;
         this.weight = 0;
+        this.maximumWeight = maximumWeight;
         this.items = new ArrayList<>();
 
     }
 
     public int addItem(Item item) {
-
 
         if (item.getWeight() + this.weight > this.maximumWeight) {
             return -1;
@@ -27,9 +26,7 @@ public class ItemBag {
 
             items.add(item);
 
-        }
-
-        else {
+        } else {
 
             int i = 0;
             int itemAmount = this.getNumOfItems();
@@ -42,7 +39,7 @@ public class ItemBag {
                 }
 
             }
-            while (this.getNumOfItems() <= itemAmount);
+            while (this.items.size() <= itemAmount);
 
         }
 
@@ -53,7 +50,7 @@ public class ItemBag {
 
     public Item removeItemAt(int index) {
 
-        if (this.itemDoesNotExistAt(index)) {
+        if (!this.itemExistsAt(index)) {
             return null;
         }
         Item item = this.items.get(index);
@@ -65,7 +62,7 @@ public class ItemBag {
 
     public String peekItemAt(int index) {
 
-        if (this.itemDoesNotExistAt(index)) {
+        if (!this.itemExistsAt(index)) {
             return "";
         }
         Item item = this.items.get(index);
@@ -75,7 +72,7 @@ public class ItemBag {
 
     public Item popItem() {
 
-        if (this.getNumOfItems() == 0) {
+        if (this.items.size() < 1) {
             return null;
         }
         this.weight -= this.items.get(0).getWeight();
@@ -83,8 +80,8 @@ public class ItemBag {
 
     }
 
-    private boolean itemDoesNotExistAt(int index) {
-        return index > this.items.size() - 1 || index < 0;
+    private boolean itemExistsAt(int index) {
+        return index >= 0 && index <= this.items.size() - 1;
     }
 
     public double getCurrentWeight() {

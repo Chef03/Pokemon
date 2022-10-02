@@ -1,37 +1,41 @@
 package assignment2;
 
-
 public class Skill {
 
     private final String name;
-    private final int ap;
     private final int ec;
+    private final int ap;
 
     public Skill(String name, int ap, int ec) {
 
         this.name = name;
-        this.ap = ap;
         this.ec = ec;
+        this.ap = ap;
 
     }
 
     public String getName() {
         return this.name;
     }
+
     public int getAP() {
         return this.ap;
     }
-    public int getEnergyCost() { return this.ec; }
+
+    public int getEnergyCost() {
+        return this.ec;
+    }
 
     @Override
     public String toString() {
 
-        return String.format("%s - AP: %d EC: %d", this.name, this.ap, this.ec);
+        return Formatter.printSkill(this);
 
     }
 
     @Override
     public boolean equals(Object otherObject) {
+
 
         if (!(otherObject instanceof Skill)) {
             return false;
@@ -43,7 +47,6 @@ public class Skill {
                 && this.ec == otherSkill.ec;
 
     }
-
 
 
 }

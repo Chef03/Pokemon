@@ -6,8 +6,8 @@ import java.util.EnumSet;
 public class TypeData {
 
     private final static EnumMap<PokeType, TypeData> PokemonTypes = new EnumMap<>(PokeType.class);
-    public final EnumSet<PokeType> effectiveTypes;
-    public final EnumSet<PokeType> ineffectiveTypes;
+    private final EnumSet<PokeType> effectiveTypes;
+    private final EnumSet<PokeType> ineffectiveTypes;
 
     private TypeData(EnumSet<PokeType> effectiveAgainst, EnumSet<PokeType> ineffectiveAgainst) {
 
@@ -16,13 +16,13 @@ public class TypeData {
 
     }
 
-    public static TypeData getType(PokeType pokemonType) {
+    public static TypeData getType(PokeType type) {
 
-        if(PokemonTypes.size() < 1) {
+        if (PokemonTypes.size() < 1) {
             loadTypes();
         }
 
-        return PokemonTypes.get(pokemonType);
+        return PokemonTypes.get(type);
 
     }
 
@@ -93,6 +93,18 @@ public class TypeData {
                 )
         );
 
+
+    }
+
+    public boolean isEffectiveAgainst(PokeType type) {
+
+        return this.effectiveTypes.contains(type);
+
+    }
+
+    public boolean isIneffectiveAgainst(PokeType type) {
+
+        return this.ineffectiveTypes.contains(type);
 
     }
 
