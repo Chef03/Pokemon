@@ -1,5 +1,6 @@
 package assignment2;
 
+
 public class Pokemon {
 
     private final PokeType type;
@@ -8,6 +9,10 @@ public class Pokemon {
     private final int energyRestoreAmount;
     private final int healAmount;
     private String name;
+
+    private final String thumbnailURL;
+    private final String animation;
+
     private int hp;
     private int ep;
     private Skill skill;
@@ -23,6 +28,8 @@ public class Pokemon {
         this.healAmount = 20;
         this.energyRestoreAmount = 25;
         this.skill = null;
+        this.thumbnailURL = API.fetchImage(this.name);
+        this.animation = this.thumbnailURL.equals("") ? "" : API.fetchAnimation(this.name);
 
     }
 
@@ -123,6 +130,12 @@ public class Pokemon {
 
     public int getMAX_HP() {
         return this.maxHP;
+    }
+    public String getThumbnailURL() {
+        return this.thumbnailURL;
+    }
+    public String getAnimation() {
+        return this.animation;
     }
 
     @Override

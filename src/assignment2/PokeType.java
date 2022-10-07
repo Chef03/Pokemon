@@ -1,6 +1,6 @@
 package assignment2;
 
-enum PokeType {
+public enum PokeType {
 
     FIRE("Fire"),
     WATER("Water"),
